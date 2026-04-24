@@ -1,0 +1,22 @@
+on:
+    workflow_call: #This means it is called by someone, should get inputs from caller
+        inputs:
+            project:
+                required: true
+                type: string
+            component:
+                required: true
+                type: string
+            environment:
+                required: true
+                type: string
+jobs:
+    nodeJS-feature-pipeline:
+        runs-on: self-hosted
+        steps:
+        - name: checkout
+          uses: actions/checkout@v6
+        - name: print files
+          run: ls -l
+              
+
