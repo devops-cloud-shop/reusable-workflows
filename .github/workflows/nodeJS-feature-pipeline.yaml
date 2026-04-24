@@ -1,3 +1,4 @@
+name: nodeJS-feature-pipeline
 on:
     workflow_call: #This means it is called by someone, should get inputs from caller
         inputs:
@@ -10,13 +11,39 @@ on:
             environment:
                 required: true
                 type: string
+env:
+    ACC_ID: 600442391603
 jobs:
     nodeJS-feature-pipeline:
         runs-on: self-hosted
         steps:
         - name: checkout
           uses: actions/checkout@v6
-        - name: print files
+        - name: list files
           run: ls -l
-              
 
+        - name: get version
+          run: |
+            # if you store it in GITHUB_ENV, you can use in other steps in the same job
+            echo "APP_VERSION=${GITHUB_SHA::9}" >> "$GITHUB_ENV"
+        
+        - name: print inputs
+          run: |
+            echo ${{ inputs.project }}
+            echo "version: ${APP_VERSION}"  
+        
+        - name: install dependencies
+          run: npm install
+
+        - name: run unit tests
+          id: unit_tests
+          run: echo "run unit tests"
+        
+        - name: update unit tests status
+          if: always()
+          uses: devops-cloud-shop/reusable-workflows/.github/actions/update-commit-status@main
+          with: 
+            sha: ${{ github.sha }}
+            state: ${{ steps.unit_tests.outcome }} #success or failure  or cancelled
+            context: UNIT_TESTS
+            description: ${{ steps.unit_tests.outcome }}
