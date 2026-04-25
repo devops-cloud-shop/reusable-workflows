@@ -52,7 +52,7 @@ jobs:
         - name: docker build
           id: docker_build
           run: |
-                docker build -t ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com/${{ inputs.project }}/${{ inputs.component }}:${APP_VERSION} .
+                docker build --no-cache -t ${ACC_ID}.dkr.ecr.us-east-1.amazonaws.com/${{ inputs.project }}/${{ inputs.component }}:${APP_VERSION} .
                 docker images
         
         - name: update docker build status
