@@ -91,7 +91,7 @@ jobs:
 
         - name: Update scan status
           if: always()
-          uses: daws-86s/workflows/.github/actions/update-commit-status@main
+          uses: devops-cloud-shop/reusable-workflows/.github/actions/update-commit-status@main
           with:
             sha: ${{ github.sha }}
             state: ${{ steps.security_check.outcome }}     # success / failure / cancelled
