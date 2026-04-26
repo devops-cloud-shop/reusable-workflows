@@ -1,4 +1,4 @@
-name: nodeJS-feature-pipeline
+name: DEV-nodeJS-pipeline
 on:
     workflow_call: #This means it is called by someone, should get inputs from caller
         inputs:
@@ -14,7 +14,7 @@ on:
 env:
     ACC_ID: 600442391603
 jobs:
-    nodeJS-feature-pipeline:
+    DEV-nodeJS-pipeline:
         runs-on: self-hosted
         steps:
         - name: checkout
