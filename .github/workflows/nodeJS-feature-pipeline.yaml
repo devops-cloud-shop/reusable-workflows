@@ -94,7 +94,7 @@ jobs:
           uses: devops-cloud-shop/reusable-workflows/.github/actions/update-commit-status@main
           with:
             sha: ${{ github.sha }}
-            state: ${{ steps.security_check.outcome }}     # success / failure / cancelled
+            state: ${{ steps.security_check.outcome }}     # success // failure / cancelled
             context: SECURITY_CHECK
             description: ${{ steps.security_check.outcome }}
         
